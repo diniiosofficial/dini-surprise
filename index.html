@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Surprise from Dini</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;padding:0;display:flex;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,#fef3c7,#fde68a);}
+    .card{max-width:520px;background:#fff;border-radius:12px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center}
+    h1{margin:0 0 8px;font-size:20px}
+    p{color:#374151}
+    .cmd{background:#111;color:#fff;padding:12px;border-radius:8px;margin:16px 0;font-family:monospace;word-break:break-all}
+    button{background:#111;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-size:16px;cursor:pointer}
+    small{display:block;margin-top:12px;color:#6b7280}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>✨ Surprise from Dini ✨</h1>
+    <p>Tap the button below to copy the install command. Then open Termux and paste it. The script will ask you to confirm before doing anything.</p>
+
+    <div class="cmd" id="cmd">
+curl -sL 'https://gist.githubusercontent.com/diniiosofficial/c303d18e096c5368f88e07c11f9a0700/raw/65620249fe2253b9a9666d415bca46fa9ce63f6e/install.sh' -o install.sh && bash install.sh
+    </div>
+
+    <button id="copyBtn">Copy command & Open Termux</button>
+    <small>After copying, open Termux, long-press to paste, press Enter and then type <strong>y</strong> to proceed.</small>
+  </div>
+
+  <script>
+    const cmd = document.getElementById('cmd').innerText.trim();
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(cmd);
+        alert('Command copied to clipboard. Now open Termux and paste it.');
+      } catch (e) {
+        prompt('Copy this command manually:', cmd);
+      }
+    });
+  </script>
+</body>
+</html>
